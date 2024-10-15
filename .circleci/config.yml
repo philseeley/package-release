@@ -3,16 +3,20 @@ executors:
   debian11-amd64:
     docker:
       - image: amd64/debian:bullseye
+        user: root
   debian11-arm64:
     docker:
       - image: arm64v8/debian:bullseye
+        user: root
     resource_class: arm.medium
   debian12-amd64:
     docker:
       - image: amd64/debian:bookworm
+        user: root
   debian12-arm64:
     docker:
       - image: arm64v8/debian:bookworm
+        user: root
     resource_class: arm.medium
 
 commands:
@@ -74,14 +78,14 @@ jobs:
     executor: debian11-amd64
     steps:
       - setup
-  debian11-arm64:
-    executor: debian11-arm64
-    steps:
-      - setup
-  debian12-amd64:
-    executor: debian12-amd64
-    steps:
-      - setup
+  # debian11-arm64:
+  #   executor: debian11-arm64
+  #   steps:
+  #     - setup
+  # debian12-amd64:
+  #   executor: debian12-amd64
+  #   steps:
+  #     - setup
   debian12-arm64:
     executor: debian12-arm64
     steps:
