@@ -1,11 +1,22 @@
 version: 2.1
-jobs:
-  build:
+executors:
+  debian11-amd64:
+    docker:
+      - image: amd64/debian:bullseye
+  debian11-arm64:
+    docker:
+      - image: arm64v8/debian:bullseye
+    resource_class: arm.medium
+  debian12-amd64:
+    docker:
+      - image: amd64/debian:bookworm
+  debian12-arm64:
     docker:
       - image: arm64v8/debian:bookworm
     resource_class: arm.medium
 
-    working_directory: /tmp
+commands:
+  setup:
     steps:
       - run:
           name: Creating Dummy Artifacts
@@ -13,6 +24,13 @@ jobs:
             mkdir /tmp/artifacts;
             uname -a > /tmp/artifacts/uname.txt;
             cp /etc/os-release /tmp/artifacts
+jobs:
+  debian11-arm64:
+    executor: debian11-amd64
+    steps:
+      - setup
 
-      - store_artifacts:
-          path: /tmp/artifacts
+workflows:
+  build:
+    jobs:
+      - debian11-arm64
