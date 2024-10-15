@@ -2,7 +2,9 @@
 
 getent passwd build
 
-su build <<__EOF
+su - build <<__EOF
+echo $HONE
+pwd
 cd /home/build
 
 PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
