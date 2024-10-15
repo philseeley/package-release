@@ -66,12 +66,12 @@ commands:
               zip
             apt install -y libstdc++-12-dev || true
             apt install -y libseat-dev || true
-            echo GETTING gradle
-            wget https://storage.googleapis.com/flutter_infra_release/gradle-wrapper/fd5c1f2c013565a3bea56ada6df9d2b8e96d56aa/gradle-wrapper.tgz
-            echo GOT gradle
+            useradd build
+            su build <<__EOF
             git clone --depth 1 --branch 3.24.3 https://github.com/flutter/flutter
             PATH="$PATH:`pwd`/flutter/bin"
             flutter doctor -v
+            __EOF
             mkdir /tmp/artifacts;
             id > /tmp/artifacts/id.txt;
             uname -a > /tmp/artifacts/uname.txt;
@@ -99,7 +99,7 @@ jobs:
 workflows:
   build:
     jobs:
-      - debian11-amd64
+      # - debian11-amd64
       # - debian11-arm64
-      # - debian12-amd64
+      - debian12-amd64
       # - debian12-arm64
