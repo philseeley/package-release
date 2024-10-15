@@ -3,14 +3,19 @@
 getent passwd build
 
 su build <<__EOF
-export HOME=/home/build
-cd $HOME
-pwd
+cd /home/build
+
+PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
+
 git clone --depth 1 --branch 3.24.3 https://github.com/flutter/flutter
-export PATH="$PATH:/home/build/flutter/bin"
 flutter doctor -v
+
+flutter pub global activate flutterpi_tool
+
 mkdir /tmp/artifacts;
-id > /tmp/artifacts/id.txt;
-uname -a > /tmp/artifacts/uname.txt;
-cp /etc/os-release /tmp/artifacts
+
+git clone --depth 1 https://github.com/philseeley/boatinstrument.git
+
+git clone --depth 1 --recursive https://github.com/philseeley/flutter-pi.git
+
 __EOF
