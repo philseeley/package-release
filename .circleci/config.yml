@@ -25,7 +25,9 @@ commands:
       - run:
           name: Setup
           command: |
-            apt update && apt upgrade -y
+            # apt update && apt upgrade -y
+            id
+            cat /etc/passwd
             apt install -y \
               cmake \
               curl \
