@@ -72,7 +72,6 @@ commands:
             apt install -y libseat-dev || true
       - run:
           name: Setup
-          user: build
           command: .circleci/setup
       - store_artifacts:
           path: /tmp/artifacts
