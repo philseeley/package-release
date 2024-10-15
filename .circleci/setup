@@ -1,5 +1,7 @@
 #!/bin/bash
 
+getent passwd build
+
 su build <<__EOF
 id
 git clone --depth 1 --branch 3.24.3 https://github.com/flutter/flutter
