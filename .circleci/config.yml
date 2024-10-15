@@ -100,7 +100,7 @@ jobs:
 workflows:
   build:
     jobs:
-      # - debian11-amd64
-      # - debian11-arm64
+      - debian11-amd64
+      - debian11-arm64
       - debian12-amd64
-      # - debian12-arm64
+      - debian12-arm64
