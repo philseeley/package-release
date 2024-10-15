@@ -3,7 +3,8 @@
 getent passwd build
 
 su build <<__EOF
-cd /home/build
+export HOME=/home/build
+cd $HOME
 pwd
 git clone --depth 1 --branch 3.24.3 https://github.com/flutter/flutter
 export PATH="$PATH:/home/build/flutter/bin"
