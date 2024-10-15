@@ -40,6 +40,7 @@ commands:
               libgl1-mesa-dev \
               libgles2-mesa-dev \
               libglu1-mesa \
+              libgstreamer1.0-dev \
               libgstreamer-plugins-bad1.0-dev \
               libgstreamer-plugins-base1.0-dev \
               libgstreamer1.0-dev \
@@ -50,7 +51,7 @@ commands:
               libsystemd-dev \
               libudev-dev \
               libvulkan-dev \
-              libxkbcommon-dev.0-dev \
+              libxkbcommon-dev \
               m4 \
               ninja-build \
               pkg-config \
