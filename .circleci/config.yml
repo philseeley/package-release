@@ -22,7 +22,42 @@ commands:
           name: Setup
           command: |
             apt update && apt upgrade -y
-            apt install -y curl git unzip xz-utils zip libglu1-mesa wget fakeroot m4
+            apt install -y \
+              cmake \
+              curl \
+              fakeroot \
+              fontconfig \
+              git \
+              gstreamer1.0-alsa \
+              gstreamer1.0-libav \
+              gstreamer1.0-plugins-bad \
+              gstreamer1.0-plugins-base \
+              gstreamer1.0-plugins-good \
+              gstreamer1.0-plugins-ugly \
+              libdrm-dev \
+              libegl1-mesa-dev \
+              libgbm-dev \
+              libgl1-mesa-dev \
+              libgles2-mesa-dev \
+              libglu1-mesa \
+              libgstreamer-plugins-bad1.0-dev \
+              libgstreamer-plugins-base1.0-dev \
+              libgstreamer1.0-dev \
+              libgtk-3-dev \
+              libinput-dev \
+              liblzma-dev \
+              libseat-dev \
+              libsystemd-dev \
+              libudev-dev \
+              libvulkan-dev \
+              libxkbcommon-dev.0-dev \
+              m4 \
+              ninja-build \
+              pkg-config \
+              unzip \
+              wget \
+              xz-utils \
+              zip
             git clone --depth 1 --branch 3.24.3 https://github.com/flutter/flutter
             PATH="$PATH:`pwd`/flutter/bin"
             flutter doctor -v
