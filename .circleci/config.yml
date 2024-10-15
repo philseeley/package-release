@@ -21,10 +21,13 @@ commands:
       - run:
           name: Setup
           command: |
+            apt update && apt upgrade -y
+            apt install -y curl git unzip xz-utils zip libglu1-mesa wget fakeroot m4
             git clone --depth 1 --branch 3.24.3 https://github.com/flutter/flutter
             PATH="$PATH:`pwd`/flutter/bin"
             flutter doctor -v
             mkdir /tmp/artifacts;
+            id > /tmp/artifacts/id.txt;
             uname -a > /tmp/artifacts/uname.txt;
             cp /etc/os-release /tmp/artifacts
       - store_artifacts:
