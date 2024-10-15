@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: arm64v8/debian:bookworm
+    resource_class: arm.medium
 
     working_directory: /tmp
     steps:
