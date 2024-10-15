@@ -74,6 +74,9 @@ commands:
       - run:
           name: Setup
           command: .circleci/setup
+      - run:
+          name: Package
+          command: .circleci/package
       - store_artifacts:
           path: /tmp/artifacts
 jobs:
