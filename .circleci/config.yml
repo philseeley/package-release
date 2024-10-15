@@ -47,7 +47,6 @@ commands:
               libgtk-3-dev \
               libinput-dev \
               liblzma-dev \
-              libseat-dev \
               libsystemd-dev \
               libudev-dev \
               libvulkan-dev \
@@ -59,6 +58,8 @@ commands:
               wget \
               xz-utils \
               zip
+            apt install -y libstdc++-12-dev || true
+            apt install -y libseat-dev || true
             git clone --depth 1 --branch 3.24.3 https://github.com/flutter/flutter
             PATH="$PATH:`pwd`/flutter/bin"
             flutter doctor -v
