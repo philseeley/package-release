@@ -3,6 +3,7 @@ executors:
   debian11-amd64:
     docker:
       - image: amd64/debian:bullseye
+    resource_class: medium
   debian11-arm64:
     docker:
       - image: arm64v8/debian:bullseye
@@ -10,6 +11,7 @@ executors:
   debian12-amd64:
     docker:
       - image: amd64/debian:bookworm
+    resource_class: medium
   debian12-arm64:
     docker:
       - image: arm64v8/debian:bookworm

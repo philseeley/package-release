@@ -6,6 +6,7 @@ PATH="$PATH:$HOME/flutter/bin:$HOME/.pub-cache/bin"
 (
   cd boatinstrument
   ./package
+  find debian
   mv packages/* /tmp/artifacts
 )
 
