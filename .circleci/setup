@@ -1,7 +1,8 @@
 #!/bin/bash
 
 su - build <<__EOF
-PATH="$PATH:$HOME/flutter/bin:$HOME/.pub-cache/bin"
+echo HOME is $HOME
+export PATH="$PATH:$HOME/flutter/bin:$HOME/.pub-cache/bin"
 
 git clone --depth 1 --branch 3.24.3 https://github.com/flutter/flutter
 flutter doctor -v
