@@ -4,7 +4,10 @@ id
 pwd
 
 su - build <<__EOF
+echo $HOME
+pwd
 cd /home/build
+pwd
 PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
 (
