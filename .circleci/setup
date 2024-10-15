@@ -5,6 +5,11 @@ getent passwd build
 su build <<__EOF
 id
 pwd
+echo HOME $HOME
+cd $HOME
+pwd
+cd /home/build
+pwd
 git clone --depth 1 --branch 3.24.3 https://github.com/flutter/flutter
 PATH="$PATH:`pwd`/flutter/bin"
 flutter doctor -v
