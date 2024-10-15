@@ -31,7 +31,7 @@ commands:
           name: Install dependancies
           command: |
             apt update
-            # apt upgrade -y
+            apt upgrade -y
             apt install -y \
               clang \
               cmake \
