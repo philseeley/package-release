@@ -22,12 +22,15 @@ executors:
 commands:
   setup:
     steps:
+      - checkout:
+          name: Checkout
       - run:
-          name: Setup
+          name: Create user
+          command: useradd build
+      - run:
+          name: Install dependancies
           command: |
             # apt update && apt upgrade -y
-            id
-            cat /etc/passwd
             apt install -y \
               cmake \
               curl \
@@ -66,16 +69,10 @@ commands:
               zip
             apt install -y libstdc++-12-dev || true
             apt install -y libseat-dev || true
-            useradd build
-            su build <<__EOF
-            git clone --depth 1 --branch 3.24.3 https://github.com/flutter/flutter
-            PATH="$PATH:`pwd`/flutter/bin"
-            flutter doctor -v
-            __EOF
-            mkdir /tmp/artifacts;
-            id > /tmp/artifacts/id.txt;
-            uname -a > /tmp/artifacts/uname.txt;
-            cp /etc/os-release /tmp/artifacts
+      - run:
+          name: Setup
+          user: build
+          command: .circleci/setup
       - store_artifacts:
           path: /tmp/artifacts
 jobs:
