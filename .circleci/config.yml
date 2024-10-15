@@ -65,7 +65,6 @@ commands:
               pkg-config \
               unzip \
               wget \
-              xz-utils \
               zip
             apt install -y libstdc++-12-dev || true
             apt install -y libseat-dev || true
