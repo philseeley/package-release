@@ -26,6 +26,7 @@ commands:
     steps:
       - run: uname -a
       - run: linux32 uname -a
+      - run: apt list --installed
       - run: cat /etc/os-release
   process:
     steps:
@@ -102,7 +103,7 @@ jobs:
   debian12-arm64:
     executor: debian12-arm64
     steps:
-      - process
+      - test
   debian12-arm32:
     executor: debian12-arm32
     steps:
@@ -114,5 +115,5 @@ workflows:
       # - debian11-amd64
       # - debian11-arm64
       # - debian12-amd64
-      # - debian12-arm64
+      - debian12-arm64
       - debian12-arm32
