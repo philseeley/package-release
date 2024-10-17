@@ -27,7 +27,7 @@ commands:
       - run: uname -a
       - run: linux32 uname -a
       - run: apt list --installed
-      - run: cat /etc/os-release
+      - run: dpkg --print-architecture
   process:
     steps:
       - checkout:
