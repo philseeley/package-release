@@ -112,14 +112,14 @@ jobs:
   debian12-arm64:
     executor: debian12-arm64
     steps:
-      - test
+      - setup
       - run: .circleci/package pi3 pi4
       - store_artifacts:
           path: /tmp/artifacts
   debian12-arm32:
     executor: debian12-arm32
     steps:
-      - test
+      - setup
       - run: .circleci/package generic
       - store_artifacts:
           path: /tmp/artifacts
