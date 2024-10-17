@@ -18,13 +18,14 @@ executors:
     resource_class: arm.medium
   debian12-arm32:
     docker:
-      - image: arm32v7/debian:bookworm
+      - image: armhf/debian:bookworm
     resource_class: arm.medium
 
 commands:
   test:
     steps:
       - run: uname -a
+      - run: cat /etc/os-release
   process:
     steps:
       - checkout:
