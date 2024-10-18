@@ -115,8 +115,7 @@ jobs:
     steps:
       - setup
       - run:
-          working_directory: /home/build/circleci-tesing
-          command: su - build -c ".circleci/package pi3 pi4"
+          command: su - build -c "/home/build/circleci-tesing/.circleci/package pi3 pi4"
       - store_artifacts:
           path: /tmp/artifacts
   debian12-arm32:
