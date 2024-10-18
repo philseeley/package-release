@@ -5,6 +5,10 @@ su - build <<__EOF
 export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
 (
+  for a in "$@"
+  do
+    echo $a
+  done
   cd boatinstrument
   ./package "$@"
   mv packages/* /tmp/artifacts
