@@ -99,7 +99,8 @@ jobs:
     executor: debian11-arm64
     steps:
       - setup
-      - run: .circleci/package pi3 pi4
+      - run:
+          command: .circleci/package pi3 pi4
       - store_artifacts:
           path: /tmp/artifacts
   debian12-amd64:
