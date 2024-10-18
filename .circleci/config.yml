@@ -53,6 +53,7 @@ commands:
             apt install -y lib32stdc++6 || true
       - run: curl -o dart.zip https://storage.googleapis.com/dart-archive/channels/stable/release/3.5.4/sdk/dartsdk-linux-arm-release.zip
       - run: unzip dart.zip -d /home/build
+      - run: chown -R build:build /home/build/dart-sdk
       - run: /home/build/dart-sdk/bin/dart --version
       - run:
           name: Setup
