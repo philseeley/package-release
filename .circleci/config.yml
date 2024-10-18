@@ -30,11 +30,12 @@ commands:
       - run: dpkg --print-architecture
   setup:
     steps:
-      - checkout:
-          name: Checkout
       - run:
           name: Create user
           command: useradd -m build
+      - checkout:
+          name: Checkout
+          path: /home/build
       # - run:
       #     name: Install dependancies
       #     command: |
