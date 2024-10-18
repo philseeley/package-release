@@ -16,18 +16,12 @@ executors:
     docker:
       - image: arm64v8/debian:bookworm
     resource_class: arm.medium
-  debian12-arm32:
-    docker:
-      - image: arm32v7/debian:bookworm
-    resource_class: arm.medium
+  # debian12-arm32:
+  #   docker:
+  #     - image: arm32v7/debian:bookworm
+  #   resource_class: arm.medium
 
 commands:
-  dart-arm32:
-    steps:
-      - run: apt update && apt install -y curl zip
-      - run: curl -o dart.zip https://storage.googleapis.com/dart-archive/channels/stable/release/3.5.4/sdk/dartsdk-linux-arm-release.zip
-      - run: unzip dart.zip -d /usr/local
-      - run: /usr/local/dart-sdk/bin/dart --version
   all:
     steps:
       - run:
@@ -51,16 +45,12 @@ commands:
             apt install -y libstdc++-12-dev || true
             apt install -y libseat-dev || true
             apt install -y lib32stdc++6 || true
-      - run: curl -o dart.zip https://storage.googleapis.com/dart-archive/channels/stable/release/3.5.4/sdk/dartsdk-linux-arm-release.zip
-      - run: unzip dart.zip -d /home/build
-      - run: chown -R build:build /home/build/dart-sdk
-      - run: /home/build/dart-sdk/bin/dart --version
       - run:
           name: Setup
-          command: ${linux32} su - build -c "/home/build/circleci-tesing/.circleci/setup"
+          command: su - build -c "/home/build/circleci-tesing/.circleci/setup"
       - run:
           name: Package
-          command: ${linux32} su - build -c "/home/build/circleci-tesing/.circleci/package ${CPUS}"
+          command: su - build -c "/home/build/circleci-tesing/.circleci/package ${CPUS}"
       - store_artifacts:
           path: /tmp/artifacts
 jobs:
@@ -88,20 +78,18 @@ jobs:
       - CPUS: generic pi3 pi4
     steps:
       - all
-  debian12-arm32:
-    executor: debian12-arm32
-    environment:
-      # - linux32: linux32
-      - CPUS: generic pi3 pi4
-    steps:
-      - dart-arm32
-      - all
+  # debian12-arm32:
+  #   executor: debian12-arm32
+  #   environment:
+  #     - CPUS: generic pi3 pi4
+  #   steps:
+  #     - all
 
 workflows:
   build:
     jobs:
-      # - debian11-amd64
-      # - debian11-arm64
-      # - debian12-amd64
-      # - debian12-arm64
-      - debian12-arm32
+      - debian11-amd64
+      - debian11-arm64
+      - debian12-amd64
+      - debian12-arm64
+      # - debian12-arm32

@@ -2,10 +2,16 @@
 
 set -e
 
-uname -a
+export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
-export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin:/usr/local/dart-sdk/bin"
+(
+  cd boatinstrument
+  ./package "$@"
+  mv packages/* /tmp/artifacts
+)
 
-cd boatinstrument
-./package "$@"
-mv packages/* /tmp/artifacts
+(
+  cd flutter-pi
+  ./package
+  mv packages/* /tmp/artifacts
+)
