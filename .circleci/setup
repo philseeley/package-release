@@ -2,6 +2,8 @@
 
 set -e
 
+uname -a
+
 export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
 git clone --depth 1 --branch 3.24.3 https://github.com/flutter/flutter
