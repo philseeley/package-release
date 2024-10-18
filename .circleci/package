@@ -1,16 +1,18 @@
 #!/bin/bash
 
-su - build - "$@" <<__EOF
+export args="$@"
+
+su - build <<__EOF
 
 export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
 (
-  for a in "$@"
+  for a in ${args}
   do
     echo $a
   done
   cd boatinstrument
-  ./package "$@"
+  ./package ${args}
   mv packages/* /tmp/artifacts
 )
 
