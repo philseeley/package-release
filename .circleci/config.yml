@@ -24,10 +24,13 @@ executors:
 commands:
   dart:
     steps:
-      - run: apt update && apt install -y curl gpg
-      - run: curl https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg  --dearmor -o /etc/apt/trusted.gpg.d/dart.gpg
-      - run: echo 'deb [arch=arm32] https://storage.googleapis.com/download.dartlang.org/linux/debian stable main' > /etc/apt/sources.list.d/dart_stable.list
-      - run: apt update && apt install dart
+      - run: apt update && apt install -y curl gpg zip
+      # - run: curl https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg  --dearmor -o /etc/apt/trusted.gpg.d/dart.gpg
+      # - run: echo 'deb [arch=arm32] https://storage.googleapis.com/download.dartlang.org/linux/debian stable main' > /etc/apt/sources.list.d/dart_stable.list
+      # - run: apt update && apt install dart
+      - run: curl -o dart.zip https://storage.googleapis.com/dart-archive/channels/stable/release/3.5.4/sdk/dartsdk-linux-arm-release.zip
+      - run: unzip dart.zip
+      - run: ./dart-sdk/bin/dart -v
   all:
     steps:
       - run:
