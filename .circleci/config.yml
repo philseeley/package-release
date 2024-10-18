@@ -90,6 +90,7 @@ commands:
       # - store_artifacts:
       #     path: /tmp/artifacts
   package:
+    working_directory: /home/build
     steps:
       - run: pwd
       - run: su - build -c "/home/build/circleci-tesing/.circleci/package"
