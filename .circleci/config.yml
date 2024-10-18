@@ -46,10 +46,10 @@ commands:
             apt install -y libseat-dev || true
       - run:
           name: Setup
-          command: su - build -c "/home/build/circleci-tesing/.circleci/setup"
+          command: ${linux32} su - build -c "/home/build/circleci-tesing/.circleci/setup"
       - run:
           name: Package
-          command: su - build -c "/home/build/circleci-tesing/.circleci/package ${CPUS}"
+          command: ${linux32} su - build -c "/home/build/circleci-tesing/.circleci/package ${CPUS}"
       - store_artifacts:
           path: /tmp/artifacts
 jobs:
@@ -80,6 +80,7 @@ jobs:
   debian12-arm32:
     executor: debian12-arm32
     environment:
+      - linux32: linux32
       - CPUS: generic pi3 pi4
     steps:
       - all
