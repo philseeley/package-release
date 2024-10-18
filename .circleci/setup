@@ -1,7 +1,5 @@
 #!/bin/bash
 
-su - build <<__EOF
-
 export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
 git clone --depth 1 --branch 3.24.3 https://github.com/flutter/flutter
@@ -14,5 +12,3 @@ mkdir /tmp/artifacts;
 git clone --depth 1 https://github.com/philseeley/boatinstrument.git
 
 git clone --depth 1 --recursive https://github.com/philseeley/flutter-pi.git
-
-__EOF

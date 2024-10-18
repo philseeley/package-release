@@ -29,7 +29,7 @@ commands:
       - run: linux32 uname -a
       - run: apt list --installed
       - run: dpkg --print-architecture
-  setup:
+  all:
     steps:
       - run:
           name: Create user
@@ -37,103 +37,89 @@ commands:
       - checkout:
           name: Checkout
           path: /home/build/circleci-tesing
-      # - run:
-      #     name: Install dependancies
-      #     command: |
-      #       apt update
-      #       apt upgrade -y
-      #       apt install -y \
-      #         clang \
-      #         cmake \
-      #         curl \
-      #         fakeroot \
-      #         fontconfig \
-      #         git \
-      #         gstreamer1.0-alsa \
-      #         gstreamer1.0-libav \
-      #         gstreamer1.0-plugins-bad \
-      #         gstreamer1.0-plugins-base \
-      #         gstreamer1.0-plugins-good \
-      #         gstreamer1.0-plugins-ugly \
-      #         libdrm-dev \
-      #         libegl1-mesa-dev \
-      #         libgbm-dev \
-      #         libgl1-mesa-dev \
-      #         libgles2-mesa-dev \
-      #         libglu1-mesa \
-      #         libgstreamer1.0-dev \
-      #         libgstreamer-plugins-bad1.0-dev \
-      #         libgstreamer-plugins-base1.0-dev \
-      #         libgstreamer1.0-dev \
-      #         libgtk-3-dev \
-      #         libinput-dev \
-      #         liblzma-dev \
-      #         libsystemd-dev \
-      #         libudev-dev \
-      #         libvulkan-dev \
-      #         libxkbcommon-dev \
-      #         m4 \
-      #         ninja-build \
-      #         pkg-config \
-      #         unzip \
-      #         wget \
-      #         xz-utils \
-      #         zip
-      #       apt install -y libstdc++-12-dev || true
-      #       apt install -y libseat-dev || true
-      # - run:
-      #     name: Setup
-      #     command: .circleci/setup
-      # - run:
-      #     name: Package
-      #     command: .circleci/package
-      # - store_artifacts:
-      #     path: /tmp/artifacts
-  package:
-    working_directory: /home/build
-    steps:
-      - run: pwd
-      - run: su - build -c "/home/build/circleci-tesing/.circleci/package"
+      - run:
+          name: Install dependancies
+          command: |
+            apt update
+            apt upgrade -y
+            apt install -y \
+              clang \
+              cmake \
+              curl \
+              fakeroot \
+              fontconfig \
+              git \
+              gstreamer1.0-alsa \
+              gstreamer1.0-libav \
+              gstreamer1.0-plugins-bad \
+              gstreamer1.0-plugins-base \
+              gstreamer1.0-plugins-good \
+              gstreamer1.0-plugins-ugly \
+              libdrm-dev \
+              libegl1-mesa-dev \
+              libgbm-dev \
+              libgl1-mesa-dev \
+              libgles2-mesa-dev \
+              libglu1-mesa \
+              libgstreamer1.0-dev \
+              libgstreamer-plugins-bad1.0-dev \
+              libgstreamer-plugins-base1.0-dev \
+              libgstreamer1.0-dev \
+              libgtk-3-dev \
+              libinput-dev \
+              liblzma-dev \
+              libsystemd-dev \
+              libudev-dev \
+              libvulkan-dev \
+              libxkbcommon-dev \
+              m4 \
+              ninja-build \
+              pkg-config \
+              unzip \
+              wget \
+              xz-utils \
+              zip
+            apt install -y libstdc++-12-dev || true
+            apt install -y libseat-dev || true
+      - run:
+          name: Setup
+          command: su - build -c "/home/build/circleci-tesing/.circleci/setup"
+      - run:
+          name: Package
+          command: su - build -c "/home/build/circleci-tesing/.circleci/package"
       - store_artifacts:
           path: /tmp/artifacts
 jobs:
   debian11-amd64:
     executor: debian11-amd64
+    environment:
+      - CPUS: pi3 pi4
     steps:
-      - setup
-      - run: .circleci/package generic
-      - store_artifacts:
-          path: /tmp/artifacts
+      - all
   debian11-arm64:
     executor: debian11-arm64
     environment:
       - CPUS: pi3 pi4
     steps:
-      - setup
-      - run: su - build .circleci/package
-      - store_artifacts:
-          path: /tmp/artifacts
+      - all
   debian12-amd64:
     executor: debian12-amd64
+    environment:
+      - CPUS: pi3 pi4
     steps:
-      - setup
-      - run: .circleci/package generic
-      - store_artifacts:
-          path: /tmp/artifacts
+      - all
   debian12-arm64:
     executor: debian12-arm64
     environment:
       - CPUS: pi3 pi4
     steps:
-      - setup
-      - package
+      - all
   debian12-arm32:
     executor: debian12-arm32
+    environment:
+      - CPUS: pi3 pi4
     steps:
-      - setup
-      - run: .circleci/package generic
-      - store_artifacts:
-          path: /tmp/artifacts
+      - all
 
 workflows:
   build:
