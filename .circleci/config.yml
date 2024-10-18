@@ -127,6 +127,7 @@ jobs:
 
 workflows:
   build:
+    working_directory: /home/build
     jobs:
       # - debian11-amd64
       # - debian11-arm64
