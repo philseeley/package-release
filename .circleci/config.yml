@@ -90,9 +90,8 @@ jobs:
       # - linux32: linux32
       - CPUS: generic pi3 pi4
     steps:
-      # - all
       - dart-arm32
-      - run: dart -v
+      - all
 
 workflows:
   build:
