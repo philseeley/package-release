@@ -1,25 +1,10 @@
 #!/bin/bash
 
-export args="$@"
-
-su - build <<__EOF
+pwd
+echo HOME is $HOME
 
 export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
-(
-  for a in ${args}
-  do
-    echo $a
-  done
-  cd boatinstrument
-  ./package ${args}
-  mv packages/* /tmp/artifacts
-)
-
-(
-  cd flutter-pi
-  ./package
-  mv packages/* /tmp/artifacts
-)
-
-__EOF
+# cd boatinstrument
+# ./package "$@"
+# mv packages/* /tmp/artifacts
