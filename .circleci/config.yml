@@ -30,7 +30,7 @@ commands:
       # - run: apt update && apt install dart
       - run: curl -o dart.zip https://storage.googleapis.com/dart-archive/channels/stable/release/3.5.4/sdk/dartsdk-linux-arm-release.zip
       - run: unzip dart.zip
-      - run: ./dart-sdk/bin/dart -v
+      - run: ./dart-sdk/bin/dart --version
   all:
     steps:
       - run:
