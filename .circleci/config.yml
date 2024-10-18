@@ -86,7 +86,7 @@ commands:
       #     command: su - build -c "/home/build/circleci-tesing/.circleci/setup"
       - run:
           name: Package
-          command: su - build -c "/home/build/circleci-tesing/.circleci/package"
+          command: su - build -c "/home/build/circleci-tesing/.circleci/package ${CPUS}"
       - store_artifacts:
           path: /tmp/artifacts
 jobs:
