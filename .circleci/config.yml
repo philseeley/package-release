@@ -79,9 +79,9 @@ jobs:
     steps:
       - all
   debian12-arm32:
-    executor: debian12-arm64
+    executor: debian12-arm32
     environment:
-      - linux32: linux32
+      # - linux32: linux32
       - CPUS: generic pi3 pi4
     steps:
       - all
