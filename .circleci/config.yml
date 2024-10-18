@@ -44,6 +44,7 @@ commands:
               pkg-config unzip wget xz-utils zip
             apt install -y libstdc++-12-dev || true
             apt install -y libseat-dev || true
+            apt install -y lib32stdc++6 || true
       - run:
           name: Setup
           command: ${linux32} su - build -c "/home/build/circleci-tesing/.circleci/setup"
