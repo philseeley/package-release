@@ -51,6 +51,9 @@ commands:
             apt install -y libstdc++-12-dev || true
             apt install -y libseat-dev || true
             apt install -y lib32stdc++6 || true
+      - run: curl -o dart.zip https://storage.googleapis.com/dart-archive/channels/stable/release/3.5.4/sdk/dartsdk-linux-arm-release.zip
+      - run: unzip dart.zip -d /home/build
+      - run: /home/build/dart-sdk/bin/dart --version
       - run:
           name: Setup
           command: ${linux32} su - build -c "/home/build/circleci-tesing/.circleci/setup"
