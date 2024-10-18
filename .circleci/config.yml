@@ -113,6 +113,9 @@ jobs:
     executor: debian12-arm64
     steps:
       # - setup
+      - run:
+          name: Create user
+          command: useradd -m build
       - run: su - build -c ".circleci/package pi3 pi4"
       - store_artifacts:
           path: /tmp/artifacts
