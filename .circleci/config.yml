@@ -22,6 +22,7 @@ executors:
     resource_class: arm.medium
 
 commands:
+  working_directory: /home/build
   test:
     steps:
       - run: uname -a
@@ -90,6 +91,7 @@ commands:
       #     path: /tmp/artifacts
   package:
     steps:
+      - run: pwd
       - run: su - build -c "/home/build/circleci-tesing/.circleci/package"
       - store_artifacts:
           path: /tmp/artifacts

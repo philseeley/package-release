@@ -5,6 +5,8 @@ echo HOME is $HOME
 
 find . -ls
 
+echo $CPUS
+
 export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
 # cd boatinstrument
