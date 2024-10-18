@@ -93,7 +93,7 @@ jobs:
   debian11-amd64:
     executor: debian11-amd64
     environment:
-      - CPUS: pi3 pi4
+      - CPUS="pi3 pi4"
     steps:
       - all
   debian11-arm64:
