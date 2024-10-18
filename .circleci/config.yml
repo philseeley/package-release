@@ -100,7 +100,8 @@ jobs:
     steps:
       - setup
       - run:
-          command: .circleci/package pi3 pi4
+          command: |
+            .circleci/package pi3 pi4
       - store_artifacts:
           path: /tmp/artifacts
   debian12-amd64:
