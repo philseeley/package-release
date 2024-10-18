@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
 cd boatinstrument
