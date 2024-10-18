@@ -1,9 +1,7 @@
 #!/bin/bash
 
-echo args are "$@"
-echo CPUS are ${CPUS}
 export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
 cd boatinstrument
-./package ${CPUS}
+./package "$@"
 mv packages/* /tmp/artifacts

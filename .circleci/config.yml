@@ -22,13 +22,6 @@ executors:
     resource_class: arm.medium
 
 commands:
-  working_directory: /home/build
-  test:
-    steps:
-      - run: uname -a
-      - run: linux32 uname -a
-      - run: apt list --installed
-      - run: dpkg --print-architecture
   all:
     steps:
       - run:
@@ -37,53 +30,53 @@ commands:
       - checkout:
           name: Checkout
           path: /home/build/circleci-tesing
-      # - run:
-      #     name: Install dependancies
-      #     command: |
-      #       apt update
-      #       apt upgrade -y
-      #       apt install -y \
-      #         clang \
-      #         cmake \
-      #         curl \
-      #         fakeroot \
-      #         fontconfig \
-      #         git \
-      #         gstreamer1.0-alsa \
-      #         gstreamer1.0-libav \
-      #         gstreamer1.0-plugins-bad \
-      #         gstreamer1.0-plugins-base \
-      #         gstreamer1.0-plugins-good \
-      #         gstreamer1.0-plugins-ugly \
-      #         libdrm-dev \
-      #         libegl1-mesa-dev \
-      #         libgbm-dev \
-      #         libgl1-mesa-dev \
-      #         libgles2-mesa-dev \
-      #         libglu1-mesa \
-      #         libgstreamer1.0-dev \
-      #         libgstreamer-plugins-bad1.0-dev \
-      #         libgstreamer-plugins-base1.0-dev \
-      #         libgstreamer1.0-dev \
-      #         libgtk-3-dev \
-      #         libinput-dev \
-      #         liblzma-dev \
-      #         libsystemd-dev \
-      #         libudev-dev \
-      #         libvulkan-dev \
-      #         libxkbcommon-dev \
-      #         m4 \
-      #         ninja-build \
-      #         pkg-config \
-      #         unzip \
-      #         wget \
-      #         xz-utils \
-      #         zip
-      #       apt install -y libstdc++-12-dev || true
-      #       apt install -y libseat-dev || true
-      # - run:
-      #     name: Setup
-      #     command: su - build -c "/home/build/circleci-tesing/.circleci/setup"
+      - run:
+          name: Install dependancies
+          command: |
+            apt update
+            apt upgrade -y
+            apt install -y \
+              clang \
+              cmake \
+              curl \
+              fakeroot \
+              fontconfig \
+              git \
+              gstreamer1.0-alsa \
+              gstreamer1.0-libav \
+              gstreamer1.0-plugins-bad \
+              gstreamer1.0-plugins-base \
+              gstreamer1.0-plugins-good \
+              gstreamer1.0-plugins-ugly \
+              libdrm-dev \
+              libegl1-mesa-dev \
+              libgbm-dev \
+              libgl1-mesa-dev \
+              libgles2-mesa-dev \
+              libglu1-mesa \
+              libgstreamer1.0-dev \
+              libgstreamer-plugins-bad1.0-dev \
+              libgstreamer-plugins-base1.0-dev \
+              libgstreamer1.0-dev \
+              libgtk-3-dev \
+              libinput-dev \
+              liblzma-dev \
+              libsystemd-dev \
+              libudev-dev \
+              libvulkan-dev \
+              libxkbcommon-dev \
+              m4 \
+              ninja-build \
+              pkg-config \
+              unzip \
+              wget \
+              xz-utils \
+              zip
+            apt install -y libstdc++-12-dev || true
+            apt install -y libseat-dev || true
+      - run:
+          name: Setup
+          command: su - build -c "/home/build/circleci-tesing/.circleci/setup"
       - run:
           name: Package
           command: su - build -c "/home/build/circleci-tesing/.circleci/package ${CPUS}"
