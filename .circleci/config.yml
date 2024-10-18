@@ -88,6 +88,11 @@ commands:
       #     command: .circleci/package
       # - store_artifacts:
       #     path: /tmp/artifacts
+  package:
+    steps:
+      - run: su - build -c "/home/build/circleci-tesing/.circleci/package"
+      - store_artifacts:
+          path: /tmp/artifacts
 jobs:
   debian11-amd64:
     executor: debian11-amd64
@@ -98,9 +103,11 @@ jobs:
           path: /tmp/artifacts
   debian11-arm64:
     executor: debian11-arm64
+    environment:
+      - CPUS: pi3 pi4
     steps:
       - setup
-      - run: su - build .circleci/package pi3 pi4
+      - run: su - build .circleci/package
       - store_artifacts:
           path: /tmp/artifacts
   debian12-amd64:
@@ -112,12 +119,11 @@ jobs:
           path: /tmp/artifacts
   debian12-arm64:
     executor: debian12-arm64
+    environment:
+      - CPUS: pi3 pi4
     steps:
       - setup
-      - run:
-          command: su - build -c "/home/build/circleci-tesing/.circleci/package pi3 pi4"
-      - store_artifacts:
-          path: /tmp/artifacts
+      - package
   debian12-arm32:
     executor: debian12-arm32
     steps:
