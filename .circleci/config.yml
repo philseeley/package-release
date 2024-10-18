@@ -114,7 +114,9 @@ jobs:
     executor: debian12-arm64
     steps:
       - setup
-      - run: su - build -c ".circleci/package pi3 pi4"
+      - run:
+          working_directory: /home/build
+          command: su - build -c ".circleci/package pi3 pi4"
       - store_artifacts:
           path: /tmp/artifacts
   debian12-arm32:
@@ -127,7 +129,6 @@ jobs:
 
 workflows:
   build:
-    working_directory: /home/build
     jobs:
       # - debian11-amd64
       # - debian11-arm64
