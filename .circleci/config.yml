@@ -22,6 +22,12 @@ executors:
     resource_class: arm.medium
 
 commands:
+  dart:
+    steps:
+      - run: apt install -y curl gpg
+      - run: curl https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg  --dearmor -o /usr/share/trusted.gpg.d/dart.gpg
+      - run: echo 'deb https://storage.googleapis.com/download.dartlang.org/linux/debian stable main' > /etc/apt/sources.list.d/dart_stable.list
+      - run: apt-get update && sudo apt-get install dart
   all:
     steps:
       - run:
@@ -84,7 +90,9 @@ jobs:
       # - linux32: linux32
       - CPUS: generic pi3 pi4
     steps:
-      - all
+      # - all
+      - dart
+      - run: dart -v
 
 workflows:
   build:
