@@ -75,31 +75,31 @@ commands:
       - package_fpi
       - store
 jobs:
-  # debian11-amd64:
-  #   executor: debian11-amd64
-  #   environment:
-  #     - CPUS: generic
-  #   steps:
-  #     - full_build
-  # debian11-arm64:
-  #   executor: debian11-arm64
-  #   environment:
-  #     - CPUS: generic pi3 pi4
-  #   steps:
-  #     - full_build
+  debian11-amd64:
+    executor: debian11-amd64
+    environment:
+      - CPUS: generic
+    steps:
+      - full_build
+  debian11-arm64:
+    executor: debian11-arm64
+    environment:
+      - CPUS: generic pi3 pi4
+    steps:
+      - full_build
   debian12-amd64:
     executor: debian12-amd64
     environment:
       - CPUS: generic
     steps:
       - full_build
-  # debian12-arm64:
-  #   executor: debian12-arm64
-  #   environment:
-  #     - CPUS: generic pi3 pi4
-  #   steps:
-  #     - full_build
-  debian12-bi-fpi-arm32:
+  debian12-arm64:
+    executor: debian12-arm64
+    environment:
+      - CPUS: generic pi3 pi4
+    steps:
+      - full_build
+  debian12-arm32-bi-fpi:
     executor: debian12-arm64
     environment:
       - CPUS: generic
@@ -109,7 +109,7 @@ jobs:
       - install_flutter
       - package_bi
       - store
-  debian12-fpi-arm32:
+  debian12-arm32-fpi:
     executor: debian12-arm32
     steps:
       - setup
@@ -119,10 +119,10 @@ jobs:
 workflows:
   build:
     jobs:
-      # - debian11-amd64
-      # - debian11-arm64
+      - debian11-amd64
+      - debian11-arm64
       - debian12-amd64
-      # - debian12-arm64
-      - debian12-bi-fpi-arm32
-      - debian12-fpi-arm32
+      - debian12-arm64
+      - debian12-arm32-bi-fpi
+      - debian12-arm32-fpi
 
