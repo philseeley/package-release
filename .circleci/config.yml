@@ -59,7 +59,7 @@ commands:
       - run:
           name: Checkout flutter-pi
           command: su - build -c "/home/build/circleci-tesing/.circleci/package_fpi"
-  store_artifacts:
+  store:
     steps:
       - store_artifacts:
           path: /tmp/artifacts
@@ -86,7 +86,7 @@ jobs:
       - install_flutter
       - package_bi
       - package_fpi
-      - store_artifacts
+      - store
   # debian12-arm64:
   #   executor: debian12-arm64
   #   environment:
