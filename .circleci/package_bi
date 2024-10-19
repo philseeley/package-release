@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
+
+git clone --depth 1 https://github.com/philseeley/boatinstrument.git
+
+cd boatinstrument
+./package "$@"
+mv packages/* /tmp/artifacts
