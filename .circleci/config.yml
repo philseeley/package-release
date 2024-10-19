@@ -16,6 +16,10 @@ executors:
     docker:
       - image: arm64v8/debian:bookworm
     resource_class: arm.medium
+  debian12-arm32:
+    docker:
+      - image: arm32v7/debian:bookworm
+    resource_class: arm.medium
 
 commands:
   setup:
@@ -52,47 +56,65 @@ commands:
   package_bi:
     steps:
       - run:
-          name: Checkout Boatinstrument
-          command: su - build -c "/home/build/circleci-tesing/.circleci/package_bi ${CPUS}"
+          name: Package Boatinstrument
+          command: su - build -c "/home/build/circleci-tesing/.circleci/package_bi ${ARCH} ${CPUS}"
   package_fpi:
     steps:
       - run:
-          name: Checkout flutter-pi
+          name: Package flutter-pi
           command: su - build -c "/home/build/circleci-tesing/.circleci/package_fpi"
   store:
     steps:
       - store_artifacts:
           path: /tmp/artifacts
-
-jobs:
-  # debian11-amd64:
-  #   executor: debian11-amd64
-  #   environment:
-  #     - CPUS: generic
-  #   steps:
-  #     - all
-  # debian11-arm64:
-  #   executor: debian11-arm64
-  #   environment:
-  #     - CPUS: generic pi3 pi4
-  #   steps:
-  #     - all
-  debian12-amd64:
-    executor: debian12-amd64
-    environment:
-      - CPUS: generic
+  full_build:
     steps:
       - setup
       - install_flutter
       - package_bi
       - package_fpi
       - store
+jobs:
+  # debian11-amd64:
+  #   executor: debian11-amd64
+  #   environment:
+  #     - CPUS: generic
+  #   steps:
+  #     - full_build
+  # debian11-arm64:
+  #   executor: debian11-arm64
+  #   environment:
+  #     - CPUS: generic pi3 pi4
+  #   steps:
+  #     - full_build
+  debian12-amd64:
+    executor: debian12-amd64
+    environment:
+      - CPUS: generic
+    steps:
+      - full_build
   # debian12-arm64:
   #   executor: debian12-arm64
   #   environment:
   #     - CPUS: generic pi3 pi4
   #   steps:
-  #     - all
+  #     - full_build
+  debian12-bi-fpi-arm32:
+    executor: debian12-arm64
+    environment:
+      - CPUS: generic
+      - ARCH: arm
+    steps:
+      - setup
+      - install_flutter
+      - package_bi
+      - store
+  debian12-fpi-arm32:
+    executor: debian12-arm32
+    steps:
+      - setup
+      - package_fpi
+      - store
 
 workflows:
   build:
@@ -101,3 +123,6 @@ workflows:
       # - debian11-arm64
       - debian12-amd64
       # - debian12-arm64
+      - debian12-bi-fpi-arm32
+      - debian12-fpi-arm32
+
