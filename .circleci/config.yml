@@ -81,7 +81,7 @@ commands:
     steps:
       - setup
       # - install_dependancies
-      - install_flutter
+      # - install_flutter
       # - package_bi
       # - package_fpi
       # - store
