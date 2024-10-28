@@ -4,7 +4,7 @@ set -e
 
 export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
-echo checking CI version
+echo checking CI version for boatinstrument
 ci_version=$(./package-release/.circleci/version boatinstrument)
 echo ci_version ${ci_version}
 
