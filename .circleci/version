@@ -6,7 +6,5 @@ package=$1
 
 while read p current new
 do
-  [ "${package}" == "${p}" ] && { echo ${new} exit; }
+  [ "${package}" == "${p}" ] && { echo ${new}; exit; }
 done < package-release/versions
-
-exit 1

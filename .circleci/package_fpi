@@ -4,8 +4,18 @@ set -e
 
 export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
+echo checking CI version
+ci_version=$(./package-release/.circleci/version flutter-pi)
+echo ci_version ${ci_version}
+
 git clone --depth 1 --recursive https://github.com/philseeley/flutter-pi.git
 
 cd flutter-pi
+
+version=$(awk -F '"' '/^project\(flutter-pi/ {print $2}' CMakeLists.txt)
+
+[ "${ci_version}" != "${version}" ] && { echo Inconsistent versions ${ci_version} ${version}; exit 1; }
+
 ./package
+
 mv packages/* /tmp/artifacts
