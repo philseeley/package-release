@@ -6,7 +6,7 @@ export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
 ci_version=$(./package-release/.circleci/version flutter-pi)
 
-[ "${ci_version}" ] || exit
+[ "${ci_version}" ] || exit 0
 
 git clone --depth 1 --recursive https://github.com/philseeley/flutter-pi.git
 

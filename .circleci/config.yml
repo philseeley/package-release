@@ -115,7 +115,7 @@ jobs:
       - CPUS: generic pi3 pi4
     steps:
       - full_build
-  debian12-arm32-bi-fpi:
+  debian12-arm32-bi:
     executor: debian12-arm64
     environment:
       - CPUS: generic
@@ -145,7 +145,7 @@ workflows:
       - debian11-arm64
       - debian12-amd64
       - debian12-arm64
-      - debian12-arm32-bi-fpi
+      - debian12-arm32-bi
       - debian12-arm32-fpi
       - all:
           requires:
@@ -153,5 +153,5 @@ workflows:
             - debian11-arm64
             - debian12-amd64
             - debian12-arm64
-            - debian12-arm32-bi-fpi
+            - debian12-arm32-bi
             - debian12-arm32-fpi

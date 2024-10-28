@@ -6,7 +6,7 @@ export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
 ci_version=$(./package-release/.circleci/version boatinstrument)
 
-[ "${ci_version}" ] || exit
+[ "${ci_version}" ] || exit 0
 
 git clone --depth 1 https://github.com/philseeley/boatinstrument.git
 
