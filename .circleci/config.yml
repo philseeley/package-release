@@ -33,9 +33,6 @@ commands:
       - checkout:
           name: Checkout
           path: /home/build/package-release
-      # - run:
-      #     name: Set ownership
-      #     command: chown -R build:build /home/build/package-release
       - run:
           name: Check for new versions
           command: su - build -c "/home/build/package-release/.circleci/check"
@@ -88,11 +85,11 @@ commands:
   full_build:
     steps:
       - setup
-      # - install_dependancies
-      # - install_flutter
-      # - package_bi
-      # - package_fpi
-      # - store
+      - install_dependancies
+      - install_flutter
+      - package_bi
+      - package_fpi
+      - store
 jobs:
   debian11-amd64:
     executor: debian11-amd64
@@ -144,12 +141,17 @@ jobs:
 workflows:
   build:
     jobs:
+      - debian11-amd64
+      - debian11-arm64
       - debian12-amd64
+      - debian12-arm64
+      - debian12-arm32-bi-fpi
+      - debian12-arm32-fpi
       - all:
           requires:
+            - debian11-amd64
+            - debian11-arm64
             - debian12-amd64
-            # - debian11-arm64
-            # - debian12-amd64
-            # - debian12-arm64
-            # - debian12-arm32-bi-fpi
-            # - debian12-arm32-fpi
+            - debian12-arm64
+            - debian12-arm32-bi-fpi
+            - debian12-arm32-fpi

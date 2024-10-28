@@ -4,9 +4,7 @@ set -e
 
 export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
-echo checking CI version for boatinstrument
 ci_version=$(./package-release/.circleci/version boatinstrument)
-echo ci_version ${ci_version}
 
 [ "${ci_version}" ] || exit
 
@@ -16,7 +14,7 @@ cd boatinstrument
 
 version=$(awk -F '[ :+]*' '/^version:/ {print $2}' pubspec.yaml)
 
-[ "${ci_version}" != "${version}" ] && { echo Inconsistent versions ${ci_version} ${version}; exit 1; }
+[ "${ci_version}" != "${version}" ] && { echo "Inconsistent versions '${ci_version}' '${version}'"; exit 1; }
 
 ./package "$@"
 
