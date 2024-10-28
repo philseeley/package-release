@@ -4,6 +4,11 @@ set -e
 
 export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
+ci_version=$(./package-release/.circleci/version boatinstrument)
+version=$(awk -F '[ :+]*' '/^version:/ {print $2}' pubspec.yaml)
+
+[ "${ci_version}" != "${version}" ] && { echo Inconsistent versions ${ci_version} ${version}; exit 1; }
+
 git clone --depth 1 https://github.com/philseeley/boatinstrument.git
 
 cd boatinstrument

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+package=$1
+
+while read p current new
+do
+  [ "${package}" == "${p}" ] && { echo ${new} exit 0; }
+done < package-release/versions
+
+exit 1
