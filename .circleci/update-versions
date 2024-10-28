@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+package=$1
+version=$2
+
+while read package current new
+do
+  if [ "${new}" ]
+  then
+    echo ${package} ${new}
+  else
+    echo ${package} ${current}
+  fi
+done < package-release/versions > new-versions
+
+mv new-versions package-release/versions
+
+cat package-release/versions

@@ -66,6 +66,11 @@ commands:
       - run:
           name: Package flutter-pi
           command: su - build -c "/home/build/package-release/.circleci/package_fpi"
+  update_versions:
+    steps:
+      - run:
+          name: Update versions
+          command: su - build -c "/home/build/package-release/.circleci/update-versions"
   store:
     steps:
       - store_artifacts:
@@ -118,14 +123,18 @@ jobs:
       - setup
       - package_fpi
       - store
+  all:
+    executor: debian11-amd64
+    steps:
+      - update_versions
 
 workflows:
   build:
     jobs:
+      - debian12-amd64
       - all:
           requires:
-            - debian11-amd64
-          run: echo DONE
+            - debian12-amd64
             # - debian11-arm64
             # - debian12-amd64
             # - debian12-arm64
