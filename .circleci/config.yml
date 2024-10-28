@@ -88,11 +88,11 @@ commands:
   full_build:
     steps:
       - setup
-      - install_dependancies
-      - install_flutter
-      - package_bi
-      - package_fpi
-      - store
+      # - install_dependancies
+      # - install_flutter
+      # - package_bi
+      # - package_fpi
+      # - store
 jobs:
   debian11-amd64:
     executor: debian11-amd64

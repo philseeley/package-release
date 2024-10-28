@@ -8,6 +8,8 @@ echo checking CI version
 ci_version=$(./package-release/.circleci/version flutter-pi)
 echo ci_version ${ci_version}
 
+[ "${ci_version}" ] || exit
+
 git clone --depth 1 --recursive https://github.com/philseeley/flutter-pi.git
 
 cd flutter-pi
