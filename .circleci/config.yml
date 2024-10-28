@@ -34,6 +34,9 @@ commands:
           name: Checkout
           path: /home/build/package-release
       - run:
+          name: Set ownership
+          command: chown -R build:build /home/build/package-release
+      - run:
           name: Check for new versions
           command: su - build -c "/home/build/package-release/.circleci/check"
   install_dependancies:
