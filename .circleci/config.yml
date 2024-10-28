@@ -130,6 +130,7 @@ jobs:
     executor: debian12-arm32
     steps:
       - setup
+      - install_dependancies
       - package_fpi
       - store
   record_versions:
