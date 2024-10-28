@@ -36,6 +36,8 @@ commands:
       - run:
           name: Check for new versions
           command: su - build -c "/home/build/package-release/.circleci/check"
+  install_dependancies:
+    steps:
       - run:
           name: Install dependancies
           command: |
@@ -78,10 +80,11 @@ commands:
   full_build:
     steps:
       - setup
+      # - install_dependancies
       - install_flutter
-      - package_bi
-      - package_fpi
-      - store
+      # - package_bi
+      # - package_fpi
+      # - store
 jobs:
   debian11-amd64:
     executor: debian11-amd64
@@ -126,6 +129,7 @@ jobs:
   all:
     executor: debian12-amd64
     steps:
+      - setup
       - update_versions
 
 workflows:
