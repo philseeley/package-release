@@ -33,21 +33,25 @@ commands:
       - checkout:
           name: Checkout
           path: /home/build/package-release
-      - run:
-          name: Set ownership
-          command: chown -R build:build /home/build/package-release
+      # - run:
+      #     name: Set ownership
+      #     command: chown -R build:build /home/build/package-release
       - run:
           name: Check for new versions
           command: su - build -c "/home/build/package-release/.circleci/check"
+      - run:
+          name: Install git
+          command: |
+            apt update
+            apt install -y git
   install_dependancies:
     steps:
       - run:
           name: Install dependancies
           command: |
-            apt update
             apt upgrade -y
             apt install -y \
-              clang cmake curl fakeroot fontconfig git gstreamer1.0-alsa gstreamer1.0-libav \
+              clang cmake curl fakeroot fontconfig gstreamer1.0-alsa gstreamer1.0-libav \
               gstreamer1.0-plugins-bad gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly \
               libdrm-dev libegl1-mesa-dev libgbm-dev libgl1-mesa-dev libgles2-mesa-dev libglu1-mesa libgstreamer1.0-dev \
               libgstreamer-plugins-bad1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev libgtk-3-dev \
@@ -73,9 +77,10 @@ commands:
           command: su - build -c "/home/build/package-release/.circleci/package_fpi"
   update_versions:
     steps:
+      - add_ssh_keys
       - run:
           name: Update versions
-          command: su - build -c "/home/build/package-release/.circleci/update-versions"
+          command: /home/build/package-release/.circleci/update-versions
   store:
     steps:
       - store_artifacts:
@@ -120,6 +125,7 @@ jobs:
       - ARCH: arm
     steps:
       - setup
+      - install_dependancies
       - install_flutter
       - package_bi
       - store

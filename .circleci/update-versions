@@ -2,8 +2,7 @@
 
 set -e
 
-package=$1
-version=$2
+cd /home/build/package-release
 
 while read package current new
 do
@@ -13,8 +12,12 @@ do
   else
     echo ${package} ${current}
   fi
-done < package-release/versions > new-versions
+done < versions > new-versions
 
-mv new-versions -f package-release/versions
+mv new-versions -f versions
 
-cat package-release/versions
+cat versions
+
+git add versions
+git commit -m "Versions updated to\n$(cat versions)"
+git push
