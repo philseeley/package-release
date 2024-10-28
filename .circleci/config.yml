@@ -132,7 +132,7 @@ jobs:
       - setup
       - package_fpi
       - store
-  all:
+  update_versions:
     executor: debian12-amd64
     steps:
       - setup
@@ -141,17 +141,17 @@ jobs:
 workflows:
   build:
     jobs:
-      - debian11-amd64
-      - debian11-arm64
-      - debian12-amd64
-      - debian12-arm64
-      - debian12-arm32-bi
-      - debian12-arm32-fpi
-      - all:
-          requires:
-            - debian11-amd64
-            - debian11-arm64
-            - debian12-amd64
-            - debian12-arm64
-            - debian12-arm32-bi
-            - debian12-arm32-fpi
+      # - debian11-amd64
+      # - debian11-arm64
+      # - debian12-amd64
+      # - debian12-arm64
+      # - debian12-arm32-bi
+      # - debian12-arm32-fpi
+      - update_versions
+          # requires:
+          #   - debian11-amd64
+          #   - debian11-arm64
+          #   - debian12-amd64
+          #   - debian12-arm64
+          #   - debian12-arm32-bi
+          #   - debian12-arm32-fpi

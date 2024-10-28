@@ -22,5 +22,6 @@ git config --global user.email "phil.seeley@gmail.com"
 git config --global user.name "Phil Seeley (via CI)"
 
 git add versions
-git commit -m "Versions updated to\n$(cat versions)"
+git commit -m "Versions updated to:
+$(cat versions)"
 git push
