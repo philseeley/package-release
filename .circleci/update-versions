@@ -15,6 +15,6 @@ do
   fi
 done < package-release/versions > new-versions
 
-mv new-versions package-release/versions
+mv new-versions -f package-release/versions
 
 cat package-release/versions
