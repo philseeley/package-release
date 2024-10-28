@@ -35,8 +35,7 @@ commands:
           path: /home/build/package-release
       - run:
           name: Check for new versions
-          command: su - build -c "echo TEST; false"
-          # command: su - build -c "/home/build/package-release/.circleci/check"
+          command: su - build -c "/home/build/package-release/.circleci/check"
       - run:
           name: Install dependancies
           command: |
