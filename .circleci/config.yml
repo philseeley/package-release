@@ -32,7 +32,11 @@ commands:
           command: su - build -c "mkdir /tmp/artifacts"
       - checkout:
           name: Checkout
-          path: /home/build/circleci-tesing
+          path: /home/build/package-release
+      - run:
+          name: Check for new versions
+          command: su - build -c "echo TEST; false"
+          # command: su - build -c "/home/build/package-release/.circleci/check"
       - run:
           name: Install dependancies
           command: |
@@ -52,17 +56,17 @@ commands:
     steps:
       - run:
           name: Install Flutter
-          command: su - build -c "/home/build/circleci-tesing/.circleci/install_flutter"
+          command: su - build -c "/home/build/package-release/.circleci/install_flutter"
   package_bi:
     steps:
       - run:
           name: Package Boatinstrument
-          command: su - build -c "/home/build/circleci-tesing/.circleci/package_bi ${ARCH} ${CPUS}"
+          command: su - build -c "/home/build/package-release/.circleci/package_bi ${ARCH} ${CPUS}"
   package_fpi:
     steps:
       - run:
           name: Package flutter-pi
-          command: su - build -c "/home/build/circleci-tesing/.circleci/package_fpi"
+          command: su - build -c "/home/build/package-release/.circleci/package_fpi"
   store:
     steps:
       - store_artifacts:
