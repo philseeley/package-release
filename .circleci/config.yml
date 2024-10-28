@@ -124,7 +124,7 @@ jobs:
       - package_fpi
       - store
   all:
-    executor: debian11-amd64
+    executor: debian12-amd64
     steps:
       - update_versions
 
