@@ -57,7 +57,7 @@ commands:
               libdrm-dev libegl1-mesa-dev libgbm-dev libgl1-mesa-dev libgles2-mesa-dev libglu1-mesa libgstreamer1.0-dev \
               libgstreamer-plugins-bad1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev libgtk-3-dev \
               libinput-dev liblzma-dev libsystemd-dev libudev-dev libvulkan-dev libxkbcommon-dev m4 ninja-build \
-              pkg-config unzip wget xz-utils zip libseat-dev lib32stdc++6
+              pkg-config unzip wget xz-utils zip libseat-dev
             apt install -y libstdc++-12-dev || true
   install_flutter:
     steps:
