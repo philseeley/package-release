@@ -9,6 +9,7 @@ ci_version=$(./package-release/.circleci/version flutter-pi)
 [ "${ci_version}" ] || { echo No new version; exit 0; }
 
 git clone --depth 1 --recursive https://github.com/philseeley/flutter-pi.git
+git checkout disable-cursor
 
 cd flutter-pi
 
