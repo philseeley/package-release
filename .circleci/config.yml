@@ -45,10 +45,10 @@ commands:
       - run:
           name: Install git
           command: apt install -y git
-  install_dependancies:
+  install_dependencies:
     steps:
       - run:
-          name: Install dependancies
+          name: Install dependencies
           command: |
             apt upgrade -y
             apt install -y \
@@ -87,7 +87,7 @@ commands:
   full_build:
     steps:
       - setup
-      - install_dependancies
+      - install_dependencies
       - install_flutter
       - package_bi
       - package_fpi
@@ -124,7 +124,7 @@ jobs:
       - ARCH: arm
     steps:
       - setup
-      - install_dependancies
+      - install_dependencies
       - install_flutter
       - package_bi
       - store
@@ -132,7 +132,7 @@ jobs:
     executor: debian12-arm32
     steps:
       - setup
-      - install_dependancies
+      - install_dependencies
       - package_fpi
       - store
   record_versions:
@@ -144,17 +144,17 @@ jobs:
 workflows:
   build:
     jobs:
-      # - debian11-amd64
-      # - debian11-arm64
-      # - debian12-amd64
-      # - debian12-arm64
-      # - debian12-arm32-bi
+      - debian11-amd64
+      - debian11-arm64
+      - debian12-amd64
+      - debian12-arm64
+      - debian12-arm32-bi
       - debian12-arm32-fpi
       - record_versions:
           requires:
-            # - debian11-amd64
-            # - debian11-arm64
-            # - debian12-amd64
-            # - debian12-arm64
-            # - debian12-arm32-bi
+            - debian11-amd64
+            - debian11-arm64
+            - debian12-amd64
+            - debian12-arm64
+            - debian12-arm32-bi
             - debian12-arm32-fpi
