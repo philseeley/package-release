@@ -9,6 +9,7 @@ ci_version=$(./package-release/.circleci/version boatinstrument)
 [ "${ci_version}" ] || { echo No new version; exit 0; }
 
 git clone --depth 1 https://github.com/philseeley/boatinstrument.git
+git clone --depth 1 https://github.com/philseeley/actions_menu_appbar.git
 
 cd boatinstrument
 
