@@ -21,6 +21,9 @@ cat versions
 git config --global user.email "phil.seeley@gmail.com"
 git config --global user.name "Phil Seeley (via CI)"
 
+# The checkout uses https, so we need to change so that ssh keys can be used.
+git remote set-url origin git@github.com:philseeley/package-release.git
+
 git add versions
 git commit -m "Versions updated to:
 $(cat versions)"

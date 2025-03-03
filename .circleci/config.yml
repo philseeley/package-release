@@ -24,7 +24,6 @@ executors:
 commands:
   setup:
     steps:
-      - add_ssh_keys
       - run:
           name: Create user
           command: useradd -m build
