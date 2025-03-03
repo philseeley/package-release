@@ -24,6 +24,7 @@ executors:
 commands:
   setup:
     steps:
+      - add_ssh_keys
       - run:
           name: Create user
           command: useradd -m build
@@ -76,7 +77,7 @@ commands:
           command: su - build -c "/home/build/package-release/.circleci/package_fpi"
   update_versions:
     steps:
-      - add_ssh_keys
+#      - add_ssh_keys
       - run:
           name: Update versions
           command: /home/build/package-release/.circleci/update-versions
