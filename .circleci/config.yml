@@ -76,7 +76,6 @@ commands:
           command: su - build -c "/home/build/package-release/.circleci/package_fpi"
   update_versions:
     steps:
-#      - add_ssh_keys
       - run:
           name: Update versions
           command: /home/build/package-release/.circleci/update-versions
@@ -144,17 +143,17 @@ jobs:
 workflows:
   build:
     jobs:
-      - debian11-amd64
-      - debian11-arm64
-      - debian12-amd64
-      - debian12-arm64
-      - debian12-arm32-bi
+      # - debian11-amd64
+      # - debian11-arm64
+      # - debian12-amd64
+      # - debian12-arm64
+      # - debian12-arm32-bi
       - debian12-arm32-fpi
       - record_versions:
           requires:
-            - debian11-amd64
-            - debian11-arm64
-            - debian12-amd64
-            - debian12-arm64
-            - debian12-arm32-bi
+            # - debian11-amd64
+            # - debian11-arm64
+            # - debian12-amd64
+            # - debian12-arm64
+            # - debian12-arm32-bi
             - debian12-arm32-fpi
