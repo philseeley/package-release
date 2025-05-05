@@ -69,9 +69,6 @@ commands:
       - run:
           name: Check for new versions
           command: su - build -c "/home/build/package-release/.circleci/check"
-      - run:
-          name: Install git
-          command: apt install -y git
   install_flutter:
     steps:
       - run:
@@ -157,11 +154,11 @@ jobs:
   fedora41-amd64:
     executor: fedora41-amd64
     steps:
-      - install_dependencies_fedora
+      - full_build_fedora
   fedora42-amd64:
     executor: fedora42-amd64
     steps:
-      - install_dependencies_fedora
+      - full_build_fedora
   record_versions:
     executor: debian12-amd64
     steps:
@@ -173,7 +170,7 @@ workflows:
     jobs:
       # - debian11-amd64
       # - debian11-arm64
-      - debian12-amd64
+      # - debian12-amd64
       # - debian12-arm64
       # - debian12-arm32-bi
       # - debian12-arm32-fpi
@@ -183,7 +180,7 @@ workflows:
           requires:
             # - debian11-amd64
             # - debian11-arm64
-            - debian12-amd64
+            # - debian12-amd64
             # - debian12-arm64
             # - debian12-arm32-bi
             # - debian12-arm32-fpi
