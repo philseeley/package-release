@@ -30,6 +30,31 @@ executors:
     resource_class: medium
 
 commands:
+  install_dependencies_debian:
+    steps:
+      - run:
+          name: Enable backports on bullseye
+          command: |
+            . /etc/os-release
+            [ $VERSION_ID = 11 ] && echo "deb http://deb.debian.org/debian bullseye-backports main" >/etc/apt/sources.list.d/backports.list
+            apt update
+      - run:
+          name: Install dependencies
+          command: |
+            apt upgrade -y
+            apt install -y \
+              git clang cmake curl fakeroot fontconfig gstreamer1.0-alsa gstreamer1.0-libav \
+              gstreamer1.0-plugins-bad gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly \
+              libdrm-dev libegl1-mesa-dev libgbm-dev libgl1-mesa-dev libgles2-mesa-dev libglu1-mesa libgstreamer1.0-dev \
+              libgstreamer-plugins-bad1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev libgtk-3-dev \
+              libinput-dev liblzma-dev libsystemd-dev libudev-dev libvulkan-dev libxkbcommon-dev m4 ninja-build \
+              pkg-config unzip wget xz-utils zip libseat-dev
+            apt install -y libstdc++-12-dev || true
+  install_dependencies_fedora:
+    steps:
+      - run:
+          name: Install dependencies
+          command: dnf install -y util-linux git
   setup:
     steps:
       - run:
@@ -45,45 +70,8 @@ commands:
           name: Check for new versions
           command: su - build -c "/home/build/package-release/.circleci/check"
       - run:
-          name: Enable backports on bullseye
-          command: |
-            . /etc/os-release
-            [ $VERSION_ID = 11 ] && echo "deb http://deb.debian.org/debian bullseye-backports main" >/etc/apt/sources.list.d/backports.list
-            apt update
-      - run:
           name: Install git
           command: apt install -y git
-  setup-fedora:
-    steps:
-      - run:
-          name: Install dependencies
-          command: dnf install -y su git
-      - run:
-          name: Create user
-          command: useradd -m build
-      - run:
-          name: Create artifact dir
-          command: su - build -c "mkdir /tmp/artifacts"
-      - checkout:
-          name: Checkout
-          path: /home/build/package-release
-      - run:
-          name: Check for new versions
-          command: su - build -c "/home/build/package-release/.circleci/check"
-  install_dependencies:
-    steps:
-      - run:
-          name: Install dependencies
-          command: |
-            apt upgrade -y
-            apt install -y \
-              clang cmake curl fakeroot fontconfig gstreamer1.0-alsa gstreamer1.0-libav \
-              gstreamer1.0-plugins-bad gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly \
-              libdrm-dev libegl1-mesa-dev libgbm-dev libgl1-mesa-dev libgles2-mesa-dev libglu1-mesa libgstreamer1.0-dev \
-              libgstreamer-plugins-bad1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev libgtk-3-dev \
-              libinput-dev liblzma-dev libsystemd-dev libudev-dev libvulkan-dev libxkbcommon-dev m4 ninja-build \
-              pkg-config unzip wget xz-utils zip libseat-dev
-            apt install -y libstdc++-12-dev || true
   install_flutter:
     steps:
       - run:
@@ -108,13 +96,20 @@ commands:
     steps:
       - store_artifacts:
           path: /tmp/artifacts
-  full_build:
+  full_build_debian:
     steps:
+      - install_dependencies_debian
       - setup
-      - install_dependencies
       - install_flutter
       - package_bi
       - package_fpi
+      - store
+  full_build_fedora:
+    steps:
+      - install_dependencies_fedora
+      - setup
+      - install_flutter
+      - package_bi
       - store
 jobs:
   debian11-amd64:
@@ -122,51 +117,51 @@ jobs:
     environment:
       - CPUS: generic
     steps:
-      - full_build
+      - full_build_debian
   debian11-arm64:
     executor: debian11-arm64
     environment:
       - CPUS: generic pi3 pi4
     steps:
-      - full_build
+      - full_build_debian
   debian12-amd64:
     executor: debian12-amd64
     environment:
       - CPUS: generic
     steps:
-      - full_build
+      - full_build_debian
   debian12-arm64:
     executor: debian12-arm64
     environment:
       - CPUS: generic pi3 pi4
     steps:
-      - full_build
+      - full_build_debian
   debian12-arm32-bi:
     executor: debian12-arm64
     environment:
       - CPUS: generic
       - ARCH: arm
     steps:
+      - install_dependencies_debian
       - setup
-      - install_dependencies
       - install_flutter
       - package_bi
       - store
   debian12-arm32-fpi:
     executor: debian12-arm32
     steps:
+      - install_dependencies_debian
       - setup
-      - install_dependencies
       - package_fpi
       - store
   fedora41-amd64:
     executor: fedora41-amd64
     steps:
-      - setup-fedora
+      - install_dependencies_fedora
   fedora42-amd64:
     executor: fedora42-amd64
     steps:
-      - setup-fedora
+      - install_dependencies_fedora
   record_versions:
     executor: debian12-amd64
     steps:
@@ -178,7 +173,7 @@ workflows:
     jobs:
       # - debian11-amd64
       # - debian11-arm64
-      # - debian12-amd64
+      - debian12-amd64
       # - debian12-arm64
       # - debian12-arm32-bi
       # - debian12-arm32-fpi
@@ -188,7 +183,7 @@ workflows:
           requires:
             # - debian11-amd64
             # - debian11-arm64
-            # - debian12-amd64
+            - debian12-amd64
             # - debian12-arm64
             # - debian12-arm32-bi
             # - debian12-arm32-fpi

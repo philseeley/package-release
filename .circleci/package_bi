@@ -17,6 +17,11 @@ version=$(awk -F '[ :+]*' '/^version:/ {print $2}' pubspec.yaml)
 
 [ "${ci_version}" != "${version}" ] && { echo "Inconsistent versions '${ci_version}' '${version}'"; exit 1; }
 
-./package "$@"
+if [ -f /etc/fedora-release ]
+then
+  ./package-rpm "$@"
+else
+  ./package "$@"
+fi
 
 mv packages/* /tmp/artifacts
