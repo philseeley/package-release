@@ -54,7 +54,11 @@ commands:
     steps:
       - run:
           name: Install dependencies
-          command: dnf install -y util-linux git
+          command: |
+            dnf install -y util-linux git clang cmake curl fakeroot fontconfig gstreamer1-devel \
+              gstreamer1-plugins-bad-free gstreamer1-plugins-good gstreamer1-plugins-base gstreamer1-plugins-base mesa-libGLU-devel  gtk3-devel \
+              libinput-devel lzma-sdk-devel systemd-devel libudev-devel libxkbcommon-devel m4 ninja-build \
+              pkg-config unzip wget xz libseat-devel
   setup:
     steps:
       - run:
