@@ -53,6 +53,26 @@ commands:
       - run:
           name: Install git
           command: apt install -y git
+  setup-fedora:
+    steps:
+      - run:
+          name: Install dependencies
+          command: dnf install -y su git
+      - run:
+          name: Create artifact dir
+          command: su - build -c "mkdir /tmp/artifacts"
+      - checkout:
+          name: Checkout
+          path: /home/build/package-release
+      - run:
+          name: Check for new versions
+          command: su - build -c "/home/build/package-release/.circleci/check"
+      - run:
+          name: Enable backports on bullseye
+          command: |
+            . /etc/os-release
+            [ $VERSION_ID = 11 ] && echo "deb http://deb.debian.org/debian bullseye-backports main" >/etc/apt/sources.list.d/backports.list
+            apt update
   install_dependencies:
     steps:
       - run:
@@ -145,11 +165,11 @@ jobs:
   fedora41-amd64:
     executor: fedora41-amd64
     steps:
-      - full_build
+      - setup-fedora
   fedora42-amd64:
     executor: fedora42-amd64
     steps:
-      - full_build
+      - setup-fedora
   record_versions:
     executor: debian12-amd64
     steps:
