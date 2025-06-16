@@ -174,7 +174,7 @@ workflows:
     jobs:
       # - debian11-amd64
       # - debian11-arm64
-      # - debian12-amd64
+      - debian12-amd64
       - debian12-arm64
       # - debian12-arm32-bi
       # - debian12-arm32-fpi
