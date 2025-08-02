@@ -172,14 +172,14 @@ jobs:
 workflows:
   build:
     jobs:
-      # - debian11-amd64
-      # - debian11-arm64
+      - debian11-amd64
+      - debian11-arm64
       - debian12-amd64
       - debian12-arm64
-      # - debian12-arm32-bi
-      # - debian12-arm32-fpi
-      # - fedora41-amd64
-      # - fedora42-amd64
+      - debian12-arm32-bi
+      - debian12-arm32-fpi
+      - fedora41-amd64
+      - fedora42-amd64
       # - record_versions:
       #     requires:
       #       - debian11-amd64
