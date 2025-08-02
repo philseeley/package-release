@@ -36,7 +36,7 @@ commands:
           name: Enable backports on bullseye
           command: |
             . /etc/os-release
-            [ $VERSION_ID = 11 ] && echo "deb http:///archive.debian.org/debian bullseye-backports main" >/etc/apt/sources.list.d/backports.list
+            [ $VERSION_ID = 11 ] && echo "deb http://archive.debian.org/debian bullseye-backports main" >/etc/apt/sources.list.d/backports.list
             apt update
       - run:
           name: Install dependencies
