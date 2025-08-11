@@ -24,6 +24,10 @@ executors:
     docker:
       - image: amd64/debian:trixie
     resource_class: medium
+  debian13-arm64:
+    docker:
+      - image: arm64v8/debian:trixie
+    resource_class: arm.medium
   fedora41-amd64:
     docker:
       - image: amd64/fedora:41
@@ -165,6 +169,12 @@ jobs:
       - CPUS: generic
     steps:
       - full_build_debian
+  debian13-arm64:
+    executor: debian13-arm64
+    environment:
+      - CPUS: generic pi3 pi4
+    steps:
+      - full_build_debian
   fedora41-amd64:
     executor: fedora41-amd64
     steps:
@@ -189,6 +199,7 @@ workflows:
       # - debian12-arm32-bi
       # - debian12-arm32-fpi
       - debian13-amd64
+      - debian13-arm64
       # - fedora41-amd64
       # - fedora42-amd64
       # - record_versions:
