@@ -20,6 +20,10 @@ executors:
     docker:
       - image: arm32v7/debian:bookworm
     resource_class: arm.medium
+  debian13-amd64:
+    docker:
+      - image: amd64/debian:trixie
+    resource_class: medium
   fedora41-amd64:
     docker:
       - image: amd64/fedora:41
@@ -155,6 +159,12 @@ jobs:
       - setup
       - package_fpi
       - store
+  debian13-amd64:
+    executor: debian13-amd64
+    environment:
+      - CPUS: generic
+    steps:
+      - full_build_debian
   fedora41-amd64:
     executor: fedora41-amd64
     steps:
@@ -172,14 +182,15 @@ jobs:
 workflows:
   build:
     jobs:
-      - debian11-amd64
-      - debian11-arm64
-      - debian12-amd64
-      - debian12-arm64
-      - debian12-arm32-bi
-      - debian12-arm32-fpi
-      - fedora41-amd64
-      - fedora42-amd64
+      # - debian11-amd64
+      # - debian11-arm64
+      # - debian12-amd64
+      # - debian12-arm64
+      # - debian12-arm32-bi
+      # - debian12-arm32-fpi
+      - debian13-amd64
+      # - fedora41-amd64
+      # - fedora42-amd64
       # - record_versions:
       #     requires:
       #       - debian11-amd64
