@@ -28,6 +28,10 @@ executors:
     docker:
       - image: arm64v8/debian:trixie
     resource_class: arm.medium
+  debian13-arm32:
+    docker:
+      - image: arm32v7/debian:trixie
+    resource_class: arm.medium
   fedora41-amd64:
     docker:
       - image: amd64/fedora:41
@@ -76,7 +80,6 @@ commands:
           name: Create artifact dir
           command: su - build -c "mkdir /tmp/artifacts"
       - checkout:
-          name: Checkout
           path: /home/build/package-release
       - run:
           name: Check for new versions
@@ -175,6 +178,24 @@ jobs:
       - CPUS: generic pi3 pi4
     steps:
       - full_build_debian
+  debian13-arm32-bi:
+    executor: debian13-arm64
+    environment:
+      - CPUS: generic
+      - ARCH: arm
+    steps:
+      - install_dependencies_debian
+      - setup
+      - install_flutter
+      - package_bi
+      - store
+  debian13-arm32-fpi:
+    executor: debian13-arm32
+    steps:
+      - install_dependencies_debian
+      - setup
+      - package_fpi
+      - store
   fedora41-amd64:
     executor: fedora41-amd64
     steps:
@@ -192,16 +213,18 @@ jobs:
 workflows:
   build:
     jobs:
-      # - debian11-amd64
-      # - debian11-arm64
-      # - debian12-amd64
-      # - debian12-arm64
-      # - debian12-arm32-bi
-      # - debian12-arm32-fpi
-      # - debian13-amd64
+      - debian11-amd64
+      - debian11-arm64
+      - debian12-amd64
+      - debian12-arm64
+      - debian12-arm32-bi
+      - debian12-arm32-fpi
+      - debian13-amd64
       - debian13-arm64
-      # - fedora41-amd64
-      # - fedora42-amd64
+      - debian13-arm32-bi
+      - debian13-arm32-fpi
+      - fedora41-amd64
+      - fedora42-amd64
       # - record_versions:
       #     requires:
       #       - debian11-amd64
