@@ -4,7 +4,7 @@ set -e
 
 export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
-git clone --depth 1 --branch 3.35.5 https://github.com/flutter/flutter
+git clone --depth 1 --branch 3.35.4 https://github.com/flutter/flutter
 
 flutter doctor -v
 
