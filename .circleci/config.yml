@@ -40,6 +40,10 @@ executors:
     docker:
       - image: amd64/fedora:42
     resource_class: medium
+  fedora43-amd64:
+    docker:
+      - image: amd64/fedora:43
+    resource_class: medium
 
 commands:
   install_dependencies_debian:
@@ -204,6 +208,10 @@ jobs:
     executor: fedora42-amd64
     steps:
       - full_build_fedora
+  fedora43-amd64:
+    executor: fedora43-amd64
+    steps:
+      - full_build_fedora
   record_versions:
     executor: debian12-amd64
     steps:
@@ -219,12 +227,13 @@ workflows:
       # - debian12-arm64
       # - debian12-arm32-bi
       # - debian12-arm32-fpi
-      - debian13-amd64
-      - debian13-arm64
+      # - debian13-amd64
+      # - debian13-arm64
       # - debian13-arm32-bi
       # - debian13-arm32-fpi
       # - fedora41-amd64
       # - fedora42-amd64
+      - fedora43-amd64
       # - record_versions:
       #     requires:
       #       - debian11-amd64
