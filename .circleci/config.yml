@@ -150,11 +150,12 @@ commands:
       - run:
           name: Install Flutter Win
           command: |
-            # choco install visualstudio2022-workload-nativedesktop
-            choco install visualstudio2022community
+            choco install visualstudio2022-workload-nativedesktop
+            # choco install visualstudio2022community
             choco install flutter --version=3.35.4
             refreshenv
             flutter doctor -v
+            copy C:\ProgramData\chocolatey\logs\chocolatey.log c:\temp\
   package_bi_win:
     steps:
       - run:
@@ -165,6 +166,7 @@ commands:
             cd boatinstrument
             flutter build windows
             dart run msix:create --store
+            copy boatinstrument.msix c:\temp\
   store_win:
     steps:
       - store_artifacts:
