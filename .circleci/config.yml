@@ -150,7 +150,11 @@ commands:
     steps:
       - run:
           name: Install Flutter Win
-          command: Write-Host 'Hello, Windows'
+          command: |
+            Write-Host 'Hello, Windows'
+            pwd
+            dir
+            choco install flutter --version=3.35.4
 
 jobs:
   debian11-amd64:
