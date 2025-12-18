@@ -44,6 +44,10 @@ executors:
     docker:
       - image: amd64/fedora:43
     resource_class: medium
+  windows-amd64:
+    machine:
+      # image: windows-server-2025-gui:current
+      image: windows-server-2025-gui:current
 
 commands:
   install_dependencies_debian:
@@ -127,6 +131,20 @@ commands:
       - install_flutter
       - package_bi
       - store
+  install_dependencies_win:
+    steps:
+      - run:
+          name: Install Dependencies Windows
+          command: Write-Host 'windows dep'
+  install_flutter_win:
+    steps:
+      - run:
+          name: Install Flutter
+          command: Write-Host 'install flutter'
+  windows_test:
+    steps:
+      - install_dependencies_win
+      - install_flutter_win
 jobs:
   debian11-amd64:
     executor: debian11-amd64
@@ -212,6 +230,10 @@ jobs:
     executor: fedora43-amd64
     steps:
       - full_build_fedora
+  windows-amd64:
+    executor: windows-amd64
+    steps:
+      - windows_test
   record_versions:
     executor: debian12-amd64
     steps:
@@ -233,7 +255,8 @@ workflows:
       # - debian13-arm32-fpi
       # - fedora41-amd64
       # - fedora42-amd64
-      - fedora43-amd64
+      # - fedora43-amd64
+      - windows-amd64
       # - record_versions:
       #     requires:
       #       - debian11-amd64
