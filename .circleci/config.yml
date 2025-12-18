@@ -150,7 +150,7 @@ commands:
       - run:
           name: Install Flutter Win
           command: |
-            choco install visualstudio2022buildtools
+            choco install visualstudio2022-workload-nativedesktop
             choco install flutter --version=3.35.4
             refreshenv
             flutter doctor -v
