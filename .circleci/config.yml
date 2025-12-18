@@ -150,7 +150,7 @@ commands:
       - run:
           name: Install Flutter Win
           command: |
-            Write-Host 'Hello, Windows'
+            choco install visualstudio2022buildtools
             choco install flutter --version=3.35.4
             refreshenv
             flutter doctor -v
@@ -164,6 +164,10 @@ commands:
             cd boatinstrument
             flutter build windows
             dart run msix:create --store
+  store_win:
+    steps:
+      - store_artifacts:
+          path: c:\temp
 
 jobs:
   debian11-amd64:
@@ -256,6 +260,7 @@ jobs:
       - setup_win
       - install_flutter_win
       - package_bi_win
+      - store_win
   record_versions:
     executor: debian12-amd64
     steps:
