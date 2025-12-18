@@ -48,6 +48,7 @@ executors:
     machine:
       # image: windows-server-2025-gui:current
       image: windows-default
+      resource_class: windows.medium
 
 commands:
   install_dependencies_debian:
