@@ -141,8 +141,7 @@ commands:
       # - run:
       #     name: Create artifact dir
       #     command: su - build -c "mkdir /tmp/artifacts"
-      - checkout:
-          path: /home/build/package-release
+      - checkout
       # - run:
       #     name: Check for new versions
       #     command: su - build -c "/home/build/package-release/.circleci/check"
@@ -155,6 +154,16 @@ commands:
             choco install flutter --version=3.35.4
             refreshenv
             flutter doctor -v
+  package_bi_win:
+    steps:
+      - run:
+          name: Package Boat Instrument Win
+          command: |
+            git clone --depth 1 https://github.com/philseeley/boatinstrument.git
+            git clone --depth 1 https://github.com/philseeley/actions_menu_appbar.git
+            cd boatinstrument
+            flutter build windows
+            dart run msix:create --store
 
 jobs:
   debian11-amd64:
@@ -246,6 +255,7 @@ jobs:
     steps:
       - setup_win
       - install_flutter_win
+      - package_bi_win
   record_versions:
     executor: debian12-amd64
     steps:
