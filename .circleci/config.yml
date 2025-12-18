@@ -47,7 +47,7 @@ executors:
   windows-amd64:
     machine:
       # image: windows-server-2025-gui:current
-      image: windows-server-2025-gui:current
+      image: windows-default
 
 commands:
   install_dependencies_debian:
