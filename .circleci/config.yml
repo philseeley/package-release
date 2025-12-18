@@ -49,6 +49,7 @@ executors:
       # image: windows-server-2025-gui:current
       image: windows-server-2025-gui:current
       resource_class: windows.medium
+      shell: powershell.exe -ExecutionPolicy Bypass
 
 commands:
   install_dependencies_debian:
@@ -132,20 +133,25 @@ commands:
       - install_flutter
       - package_bi
       - store
-  install_dependencies_win:
+  setup_win:
     steps:
-      - run:
-          name: Install Dependencies Windows
-          command: Write-Host 'windows dep'
+      # - run:
+      #     name: Create user
+      #     command: useradd -m build
+      # - run:
+      #     name: Create artifact dir
+      #     command: su - build -c "mkdir /tmp/artifacts"
+      - checkout:
+          path: /home/build/package-release
+      # - run:
+      #     name: Check for new versions
+      #     command: su - build -c "/home/build/package-release/.circleci/check"
   install_flutter_win:
     steps:
       - run:
-          name: Install Flutter
-          command: Write-Host 'install flutter'
-  windows_test:
-    steps:
-      - install_dependencies_win
-      - install_flutter_win
+          name: Install Flutter Win
+          command: Write-Host 'Hello, Windows'
+
 jobs:
   debian11-amd64:
     executor: debian11-amd64
@@ -234,7 +240,8 @@ jobs:
   windows-amd64:
     executor: windows-amd64
     steps:
-      - windows_test
+      - setup_win
+      - install_flutter_win
   record_versions:
     executor: debian12-amd64
     steps:
