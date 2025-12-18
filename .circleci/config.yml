@@ -153,6 +153,7 @@ commands:
           command: |
             Write-Host 'Hello, Windows'
             choco install flutter --version=3.35.4
+            refreshenv
             flutter doctor -v
 
 jobs:
