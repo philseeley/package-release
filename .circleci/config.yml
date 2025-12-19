@@ -165,7 +165,7 @@ commands:
             cd boatinstrument
             flutter build windows
             dart run msix:create --store
-            copy build\windows\x64\runner\Release\boatinstrument.msix c:\temp\
+            Copy-Item "build\windows\x64\runner\Release\boatinstrument.msix" -Destination "c:\temp\"
   store_win:
     steps:
       - store_artifacts:
