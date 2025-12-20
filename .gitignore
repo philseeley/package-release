@@ -1,1 +1,4 @@
 /.vscode/
+auth.token
+project.slug
+/packages/
