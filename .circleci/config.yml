@@ -164,11 +164,10 @@ commands:
             git clone --depth 1 https://github.com/philseeley/actions_menu_appbar.git
             cd boatinstrument
             flutter build windows
-            Copy-Item "build\windows\x64\runner\Release\boatinstrument.exe" -Destination "C:\Users\circleci\artifacts"
             Compress-Archive -Path "build\windows\x64\runner\Release" -DestinationPath "boatinstrument.zip"
             Copy-Item "boatinstrument.zip" -Destination "C:\Users\circleci\artifacts"
             dart run msix:create --store
-            Move-Item "build\windows\x64\runner\Release\boatinstrument.msix" -Destination "C:\Users\circleci\artifacts"
+            Copy-Item "build\windows\x64\runner\Release\boatinstrument.msix" -Destination "C:\Users\circleci\artifacts"
   store_win:
     steps:
       - store_artifacts:
@@ -275,19 +274,19 @@ jobs:
 workflows:
   build:
     jobs:
-      # - debian11-amd64
-      # - debian11-arm64
-      # - debian12-amd64
-      # - debian12-arm64
-      # - debian12-arm32-bi
-      # - debian12-arm32-fpi
-      # - debian13-amd64
-      # - debian13-arm64
-      # - debian13-arm32-bi
-      # - debian13-arm32-fpi
-      # - fedora41-amd64
-      # - fedora42-amd64
-      # - fedora43-amd64
+      - debian11-amd64
+      - debian11-arm64
+      - debian12-amd64
+      - debian12-arm64
+      - debian12-arm32-bi
+      - debian12-arm32-fpi
+      - debian13-amd64
+      - debian13-arm64
+      - debian13-arm32-bi
+      - debian13-arm32-fpi
+      - fedora41-amd64
+      - fedora42-amd64
+      - fedora43-amd64
       - windows-amd64
       # - record_versions:
       #     requires:
@@ -297,5 +296,11 @@ workflows:
       #       - debian12-arm64
       #       - debian12-arm32-bi
       #       - debian12-arm32-fpi
+      #       - debian13-amd64
+      #       - debian13-arm64
+      #       - debian13-arm32-bi
+      #       - debian13-arm32-fpi
       #       - fedora41-amd64
       #       - fedora42-amd64
+      #       - fedora43-amd64
+      #       - windows-amd64
