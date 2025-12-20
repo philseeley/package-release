@@ -138,9 +138,9 @@ commands:
       # - run:
       #     name: Create user
       #     command: useradd -m build
-      # - run:
-      #     name: Create artifact dir
-      #     command: su - build -c "mkdir /tmp/artifacts"
+      - run:
+          name: Create artifact dir
+          command: New-Item -ItemType Directory -Path C:\Users\circleci\artifacts
       - checkout
       # - run:
       #     name: Check for new versions
@@ -165,11 +165,11 @@ commands:
             cd boatinstrument
             flutter build windows
             dart run msix:create --store
-            Copy-Item "build\windows\x64\runner\Release\boatinstrument.msix" -Destination "c:\temp\"
+            Copy-Item "build\windows\x64\runner\Release\boatinstrument.msix" -Destination "C:\Users\circleci\artifacts"
   store_win:
     steps:
       - store_artifacts:
-          path: c:\temp
+          path: C:\Users\circleci\artifacts
 
 jobs:
   debian11-amd64:
