@@ -6,6 +6,7 @@ import json
 import http.client
 from urllib.request import urlretrieve
 from urllib.parse import urlparse
+import shutil
 
 if len(sys.argv) < 2:
   print(f'Usage: {sys.argv[0]} <pipeline_id>')
@@ -17,9 +18,11 @@ slug = open('project.slug', 'r').read().replace('\n', '')
 auth_token = open('auth.token', 'r').read().replace('\n', '')
 
 dir = 'packages'
-if not os.path.isdir(dir):
-  os.mkdir(dir)
 
+if os.path.isdir(dir):
+  shutil.rmtree(dir)
+
+os.mkdir(dir)
 os.chdir(dir)
 
 headers = { 'Circle-Token': auth_token }
