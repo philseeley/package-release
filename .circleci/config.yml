@@ -135,16 +135,10 @@ commands:
       - store
   setup_win:
     steps:
-      # - run:
-      #     name: Create user
-      #     command: useradd -m build
       - run:
           name: Create artifact dir
           command: New-Item -ItemType Directory -Path C:\Users\circleci\artifacts
       - checkout
-      # - run:
-      #     name: Check for new versions
-      #     command: su - build -c "/home/build/package-release/.circleci/check"
   install_flutter_win:
     steps:
       - run:
