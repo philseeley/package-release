@@ -146,7 +146,8 @@ commands:
           command: |
             choco install visualstudio2022community
             choco install visualstudio2022-workload-nativedesktop
-            choco install flutter --version=3.35.4
+            # Also update Linux version in install_flutter script.
+            choco install flutter --version=3.38.7
             refreshenv
             flutter doctor -v
   package_bi_win:
@@ -281,7 +282,7 @@ workflows:
       # - fedora41-amd64
       # - fedora42-amd64
       # - fedora43-amd64
-      # - windows-amd64
+      - windows-amd64
       # - record_versions:
       #     requires:
       #       - debian11-amd64
