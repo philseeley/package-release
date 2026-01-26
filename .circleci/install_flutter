@@ -4,6 +4,7 @@ set -e
 
 export PATH="$PATH:/home/build/flutter/bin:/home/build/.pub-cache/bin"
 
+# Also update the Windows version in config.yml.
 git clone --depth 1 --branch 3.38.7 https://github.com/flutter/flutter
 
 flutter doctor -v
