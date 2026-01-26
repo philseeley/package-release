@@ -147,7 +147,7 @@ commands:
             choco install visualstudio2022community
             choco install visualstudio2022-workload-nativedesktop
             # Also update Linux version in install_flutter script.
-            choco install flutter --version=3.38.7
+            choco install flutter --version=3.38.5
             refreshenv
             flutter doctor -v
   package_bi_win:
