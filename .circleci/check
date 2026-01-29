@@ -2,7 +2,7 @@
 
 set -e
 
-while read package current new
+while read package new
 do
   [ "${new}" ] && exit 0
 done < package-release/versions

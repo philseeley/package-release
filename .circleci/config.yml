@@ -260,11 +260,6 @@ jobs:
       - install_flutter_win
       - package_bi_win
       - store_win
-  record_versions:
-    executor: debian12-amd64
-    steps:
-      - setup
-      - update_versions
 
 workflows:
   build:
@@ -283,19 +278,3 @@ workflows:
       - fedora42-amd64
       - fedora43-amd64
       - windows-amd64
-      # - record_versions:
-      #     requires:
-      #       - debian11-amd64
-      #       - debian11-arm64
-      #       - debian12-amd64
-      #       - debian12-arm64
-      #       - debian12-arm32-bi
-      #       - debian12-arm32-fpi
-      #       - debian13-amd64
-      #       - debian13-arm64
-      #       - debian13-arm32-bi
-      #       - debian13-arm32-fpi
-      #       - fedora41-amd64
-      #       - fedora42-amd64
-      #       - fedora43-amd64
-      #       - windows-amd64

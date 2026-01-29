@@ -4,7 +4,7 @@ set -e
 
 package=$1
 
-while read p current new
+while read p new
 do
   [ "${package}" == "${p}" ] && { echo ${new}; exit; }
 done < package-release/versions
