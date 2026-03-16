@@ -9,4 +9,5 @@ git clone --depth 1 --branch 3.41.4 https://github.com/flutter/flutter
 
 flutter doctor -v
 
-flutter pub global activate flutterpi_tool
+# flutter-pi is not currently compatible with the latest flutter.
+#flutter pub global activate flutterpi_tool
