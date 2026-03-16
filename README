@@ -1,0 +1,3 @@
+To upload a test version:
+
+rclone sync -P packages/ 'drive:Shared/Boat-Instrument/'
