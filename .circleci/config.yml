@@ -149,7 +149,8 @@ commands:
             # Also update Linux version in install_flutter script.
             choco install flutter
             cd C:\tools\flutter
-            git checkout 3.41.4
+            flutter upgrade
+            # git checkout 3.41.4
             refreshenv
             flutter doctor -v
   package_bi_win:
