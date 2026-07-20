@@ -44,6 +44,10 @@ executors:
     docker:
       - image: amd64/fedora:43
     resource_class: medium
+  fedora44-amd64:
+    docker:
+      - image: amd64/fedora:44
+    resource_class: medium
   windows-amd64:
     machine:
       # image: windows-server-2025-gui:current
@@ -257,6 +261,10 @@ jobs:
     executor: fedora43-amd64
     steps:
       - full_build_fedora
+  fedora44-amd64:
+    executor: fedora44-amd64
+    steps:
+      - full_build_fedora
   windows-amd64:
     executor: windows-amd64
     steps:
@@ -268,17 +276,18 @@ jobs:
 workflows:
   build:
     jobs:
-      - debian11-amd64
-      - debian11-arm64
-      - debian12-amd64
-      - debian12-arm64
-      - debian12-arm32-bi
-      - debian12-arm32-fpi
-      - debian13-amd64
-      - debian13-arm64
-      - debian13-arm32-bi
-      - debian13-arm32-fpi
-      - fedora41-amd64
-      - fedora42-amd64
+      # - debian11-amd64
+      # - debian11-arm64
+      # - debian12-amd64
+      # - debian12-arm64
+      # - debian12-arm32-bi
+      # - debian12-arm32-fpi
+      # - debian13-amd64
+      # - debian13-arm64
+      # - debian13-arm32-bi
+      # - debian13-arm32-fpi
+      # - fedora41-amd64
+      # - fedora42-amd64
       - fedora43-amd64
-      - windows-amd64
+      - fedora44-amd64
+      # - windows-amd64
