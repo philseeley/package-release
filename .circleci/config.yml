@@ -32,10 +32,6 @@ executors:
     docker:
       - image: arm32v7/debian:trixie
     resource_class: arm.medium
-  fedora41-amd64:
-    docker:
-      - image: amd64/fedora:41
-    resource_class: medium
   fedora42-amd64:
     docker:
       - image: amd64/fedora:42
@@ -249,10 +245,6 @@ jobs:
       - setup
       - package_fpi
       - store
-  fedora41-amd64:
-    executor: fedora41-amd64
-    steps:
-      - full_build_fedora
   fedora42-amd64:
     executor: fedora42-amd64
     steps:
@@ -276,18 +268,17 @@ jobs:
 workflows:
   build:
     jobs:
-      # - debian11-amd64
-      # - debian11-arm64
-      # - debian12-amd64
-      # - debian12-arm64
-      # - debian12-arm32-bi
-      # - debian12-arm32-fpi
-      # - debian13-amd64
-      # - debian13-arm64
-      # - debian13-arm32-bi
-      # - debian13-arm32-fpi
-      # - fedora41-amd64
-      # - fedora42-amd64
+      - debian11-amd64
+      - debian11-arm64
+      - debian12-amd64
+      - debian12-arm64
+      - debian12-arm32-bi
+      - debian12-arm32-fpi
+      - debian13-amd64
+      - debian13-arm64
+      - debian13-arm32-bi
+      - debian13-arm32-fpi
+      - fedora42-amd64
       - fedora43-amd64
       - fedora44-amd64
-      # - windows-amd64
+      - windows-amd64
