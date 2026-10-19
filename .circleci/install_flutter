@@ -9,4 +9,4 @@ git clone --depth 1 --branch 3.47.7 https://github.com/flutter/flutter
 
 flutter doctor -v
 
-flutter pub global activate flutterpi_tool
+# flutter pub global activate flutterpi_tool
