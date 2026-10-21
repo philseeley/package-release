@@ -104,8 +104,8 @@ commands:
     steps:
       - run:
           name: Package Boatinstrument
-          command: su - build -c "/home/build/package-release/.circleci/package_bi ${ARCH}"
-          # command: su - build -c "/home/build/package-release/.circleci/package_bi ${ARCH} ${CPUS}"
+          # command: su - build -c "/home/build/package-release/.circleci/package_bi ${ARCH}"
+          command: su - build -c "/home/build/package-release/.circleci/package_bi ${ARCH} ${CPUS}"
   package_fpi:
     steps:
       - run:
