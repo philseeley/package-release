@@ -36,6 +36,10 @@ executors:
     docker:
       - image: amd64/fedora:44
     resource_class: medium
+  fedora45-amd64:
+    docker:
+      - image: amd64/fedora:45
+    resource_class: medium
   windows-amd64:
     machine:
       # image: windows-server-2025-gui:current
@@ -239,6 +243,10 @@ jobs:
     executor: fedora44-amd64
     steps:
       - full_build_fedora
+  fedora45-amd64:
+    executor: fedora45-amd64
+    steps:
+      - full_build_fedora
   windows-amd64:
     executor: windows-amd64
     steps:
@@ -261,4 +269,5 @@ workflows:
       - fedora42-amd64
       - fedora43-amd64
       - fedora44-amd64
+      - fedora45-amd64
       - windows-amd64
